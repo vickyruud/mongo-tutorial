@@ -15,14 +15,20 @@ const connectionString = 'mongodb+srv://vickyruud:Ok78JCHRcgBknvxZ@firstcluster.
 MongoClient.connect(connectionString)
   .then(client => {
     console.log('Connected to MongoDB');
-    const db = client.db('star-wars-quotes');
+    const db = client.db('pet-quotes');
     const quotesCollection = db.collection('quotes');
 
     app.use(bodyParser.urlencoded({ extended: true }));
+    
+    //get request from db and then render it
     app.get('/', (req, res) => {
+      db.collection('quotes').find().toArray()
+        .then(result => {
+          console.log(result);
+        })
+      .catch(error => console.error(error))
+
       res.sendFile(__dirname + '/index.html')
-      console.log(__dirname);
-      
     });
     app.post('/quotes', (req, res) => {
       quotesCollection.insertOne(req.body)
