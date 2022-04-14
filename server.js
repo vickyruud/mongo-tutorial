@@ -5,8 +5,8 @@ const MongoClient = require('mongodb').MongoClient
 
 //body parser
 
-app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.set('view engine', 'ejs')
 app.use(bodyParser.json())
 
 app.listen(5000, () => {
@@ -40,7 +40,22 @@ MongoClient.connect(connectionString)
     });
 
     app.put('/quotes', (req, res) => {
-      console.log(req.body)
+      quotesCollection.findOneAndUpdate(
+        { name: 'Luna' },
+        {
+          $set: {
+            name: req.body.name,
+            quote: req.body.quote
+          }
+        },
+        {
+          upsert: true
+        }
+      )
+        .then(result => {
+          res.json('Success');
+        })
+        .catch(error => console.error(error));
     })
     
 

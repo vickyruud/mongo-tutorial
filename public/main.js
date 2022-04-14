@@ -1,6 +1,9 @@
-const update = document.querySelector('#update-button')
+window.onload=function(){
+  
+  
+  const update = document.querySelector('#update-button')
 
-update.addEventListener('click', _ => {
+  update.addEventListener('click', _ => {
   fetch('/quotes', {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
@@ -9,4 +12,12 @@ update.addEventListener('click', _ => {
       quote: 'I love to shout!'
     })
   })
-})
+  .then(res => {
+    if (res.ok) return res.json()
+  })
+  .then(response => {
+     window.location.reload(true)
+  })
+  .catch(error => console.error(error))
+  })
+}
