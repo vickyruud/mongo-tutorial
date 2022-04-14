@@ -6,7 +6,8 @@ const MongoClient = require('mongodb').MongoClient
 //body parser
 
 app.set('view engine', 'ejs')
-
+app.use(express.static('public'))
+app.use(bodyParser.json())
 
 app.listen(5000, () => {
   console.log("Listening on port 5000");
@@ -36,6 +37,10 @@ MongoClient.connect(connectionString)
           res.redirect('/')
         })
         .catch(error => console.log(error));
+    });
+
+    app.put('/quotes', (req, res) => {
+      console.log(req.body)
     })
     
 
