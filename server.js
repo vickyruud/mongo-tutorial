@@ -5,6 +5,8 @@ const MongoClient = require('mongodb').MongoClient
 
 //body parser
 
+app.set('view engine', 'ejs')
+
 
 app.listen(5000, () => {
   console.log("Listening on port 5000");
