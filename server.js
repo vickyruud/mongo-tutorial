@@ -26,11 +26,9 @@ MongoClient.connect(connectionString)
     app.get('/', (req, res) => {
       db.collection('quotes').find().toArray()
         .then(result => {
-          console.log(result);
+          res.render('index.ejs', {quotes: result})
         })
       .catch(error => console.error(error))
-
-      res.sendFile(__dirname + '/index.html')
     });
     app.post('/quotes', (req, res) => {
       quotesCollection.insertOne(req.body)
