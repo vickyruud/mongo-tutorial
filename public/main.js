@@ -9,7 +9,7 @@ window.onload=function(){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       name: 'Castiel',
-      quote: 'I love to shout!'
+      quote: 'MEOW!!'
     })
   })
   .then(res => {
