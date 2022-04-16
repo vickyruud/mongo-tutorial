@@ -1,8 +1,8 @@
 window.onload=function(){
   
-  
+  //lonce window loads identify the update button.
   const update = document.querySelector('#update-button')
-
+  //listen to the event and update the quote
   update.addEventListener('click', _ => {
   fetch('/quotes', {
     method: 'put',
